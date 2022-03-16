@@ -18,4 +18,5 @@ jobs:
 workflows:
   s3-example:
     jobs:
-      - build
+      - build:
+          context: aws-s3
