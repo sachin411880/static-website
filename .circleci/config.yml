@@ -11,7 +11,7 @@ jobs:
           name: listing the files and folders
           command: ls -lrth && pwd
       - aws-s3/sync:
-          from: .
+          from: /home/circleci/project
           to: "s3://static-website-circleci"
           arguments: |
             --acl public-read \
