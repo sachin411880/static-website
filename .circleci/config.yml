@@ -12,7 +12,7 @@ jobs:
           command: ls -lrth
       - aws-s3/sync:
           from: .
-          to: 's3://static-website-circleci/*'
+          to: 's3://static-website-circleci'
 workflows:
   s3-example:
     jobs:
