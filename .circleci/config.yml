@@ -43,4 +43,4 @@ workflows:
       - undeploy:
           context: aws-s3
           requires:
-            - approve-to-deploy
+            - approve-to-undeploy
