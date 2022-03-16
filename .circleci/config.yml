@@ -9,12 +9,12 @@ jobs:
       - checkout
       - run:
           name: listing the files and folders
-          command: ls -lrth
+          command: ls -lrth && pwd
       - aws-s3/sync:
           arguments: |
             --acl public-read \
             --cache-control "max-age=86400"
-          from: bucket
+          from: .
           to: 's3://static-website-circleci/*'
 workflows:
   s3-example:
