@@ -6,20 +6,12 @@ jobs:
       - image: 'cimg/python:3.6'
     steps:
       - checkout
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - restore_cache:
-          keys: 
-            - my-cache-v2
       - run:
           name: listing the files and folders
           command: ls -lrth && pwd && ls -lrth /usr/local/bin
       - run:
           name: installing awscli
           command: pip install --upgrade pip && pip install --upgrade awscli
-      - save_cache:
-          key: my-cache-v2
-          paths:
-            - "/usr/local/bin"
       - run:
           name: Deploying to S3
           command: aws s3 sync ~/static-website s3://static-website-circleci
@@ -27,10 +19,7 @@ jobs:
     docker:
       - image: 'cimg/python:3.6'
     steps:
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - restore_cache:
-          keys: 
-            - my-cache-v2
+      - run: pip install --upgrade pip && pip install --upgrade awscli
       - run:
           name: Following files will be deleted
           command: aws s3 rm s3://static-website-circleci/ --dryrun --recursive --include "*"
