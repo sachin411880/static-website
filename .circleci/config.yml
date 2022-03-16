@@ -12,14 +12,13 @@ jobs:
             - my-cache-v1
       - run:
           name: listing the files and folders
-          command: ls -lrth && pwd 
+          command: ls -lrth && pwd && ls -lrth /usr/local/bin
       - run:
           name: installing awscli
           command: pip install --upgrade pip && pip install --upgrade awscli
       - save_cache:
           key: my-cache-v1
           paths:
-            - my-file.txt
             - "/usr/local/bin"
       - run:
           name: Deploying to S3
