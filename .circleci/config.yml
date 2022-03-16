@@ -8,12 +8,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: creating a directory and copying the files to it
-          command: |
-            mkdir -p bucket
-            cp . bucket
+          name: listing the files and folders
+          command: ls -lrth
       - aws-s3/sync:
-          from: bucket
+          from: .
           to: 's3://static-website-circleci/*'
 workflows:
   s3-example:
