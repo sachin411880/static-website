@@ -3,26 +3,20 @@ orbs:
   aws-s3: circleci/aws-s3@3.0.0
 jobs:
   build:
+    working_directory: ~/static-website
     docker:
       - image: 'cimg/python:3.6'
     steps:
       - checkout
       - run:
           name: listing the files and folders
-          command: ls -lrth && pwd
-      - aws-s3/sync:
-          from: /home/circleci/project
-          to: "s3://static-website-circleci"
-          arguments: |
-            --acl public-read \
-            --cache-control "max-age=86400"
-            overwrite: true
+          command: ls -lrth && pwd 
       - run:
           name: installing awscli
           command: pip install --upgrade awscli
-      # - run:
-      #     name: Deploying to S3
-      #     command: aws s3 sync . s3://static-website-circleci
+      - run:
+          name: Deploying to S3
+          command: aws s3 sync ~/static-website s3://static-website-circleci
       - run:
           name: waiting for 100 sec
           command: sleep 100
