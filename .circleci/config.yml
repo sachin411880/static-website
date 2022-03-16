@@ -9,7 +9,7 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - restore_cache:
           keys: 
-            - my-cache-v1
+            - my-cache-v2
       - run:
           name: listing the files and folders
           command: ls -lrth && pwd && ls -lrth /usr/local/bin
@@ -17,7 +17,7 @@ jobs:
           name: installing awscli
           command: pip install --upgrade pip && pip install --upgrade awscli
       - save_cache:
-          key: my-cache-v1
+          key: my-cache-v2
           paths:
             - "/usr/local/bin"
       - run:
@@ -30,7 +30,7 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - restore_cache:
           keys: 
-            - my-cache-v1
+            - my-cache-v2
       - run:
           name: Following files will be deleted
           command: aws s3 rm s3://static-website-circleci/ --dryrun --recursive --include "*"
