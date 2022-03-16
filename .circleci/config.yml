@@ -1,6 +1,4 @@
 version: 2.1
-orbs: 
-  aws-s3: circleci/aws-s3@3.0
 jobs:
   build:
     docker:
@@ -13,12 +11,9 @@ jobs:
       - run:
           name: installing awscli
           command: pip install --upgrade awscli
-      - aws-s3/sync:
-          arguments: |
-            --acl public-read \
-            --cache-control "max-age=86400"
-          from: /home/circleci/project
-          to: 's3://static-website-circleci/*'
+      - run:
+          name: Deploying to S3
+          command: aws s3 sync . s3://static-website-circleci
 workflows:
   s3-example:
     jobs:
