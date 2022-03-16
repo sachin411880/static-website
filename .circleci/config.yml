@@ -10,6 +10,9 @@ jobs:
       - run:
           name: listing the files and folders
           command: ls -lrth && pwd
+      - run:
+          name: installing awscli
+          command: pip install --upgrade awscli
       - aws-s3/sync:
           arguments: |
             --acl public-read \
