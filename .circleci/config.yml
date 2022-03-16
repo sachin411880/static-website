@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  aws-s3: circleci/aws-s3@3.0
 jobs:
   build:
     docker:
@@ -10,9 +8,9 @@ jobs:
       - run:
           name: listing the files and folders
           command: ls -lrth
-      - aws-s3/sync:
-          from: .
-          to: 's3://static-website-circleci'
+      - run:
+          name: Upload file to S3
+          command: aws s3 sync . s3://static-website-circleci/ --delete
 workflows:
   s3-example:
     jobs:
